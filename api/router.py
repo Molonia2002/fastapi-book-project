@@ -1,6 +1,16 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
+from typing import List
+from db import books  # Assuming books data is stored in db.py
 
-from api.routes import books
+router = APIRouter()
 
-api_router = APIRouter()
-api_router.include_router(books.router, prefix="/books", tags=["books"])
+@router.get("/books/", response_model=List[dict])
+def get_all_books():
+    return books
+
+@router.get("/books/{book_id}")
+def get_book(book_id: int):
+    for book in books:
+        if book["id"] == book_id:
+            return book
+    raise HTTPException(status_code=404, detail="Book not found")
