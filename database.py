@@ -1,5 +1,5 @@
-books = [ 
-	{"id": 1, "The Hobbit": "Book One", "author": "Author A"},
-	{"id": 2, "title": "Book Two", "author": "Author B"},
-	{"id": 3, "title": "Book Three", "author": "Author C"},
+books = [
+    {"id": 1, "title": "The Hobbit", "author": "J.R.R. Tolkien"},
+    {"id": 2, "title": "1984", "author": "George Orwell"},
+    {"id": 3, "title": "To Kill a Mockingbird", "author": "Harper Lee"},
 ]
