@@ -1,4 +1,4 @@
-name: Deployment Pipeline
+name: Deploy Pipeline
 
 on:
   push:
@@ -8,11 +8,12 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
 
-      - name: Set up Docker
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build and Run Docker Container
         run: |
           docker build -t fastapi-app .
           docker run -d -p 8000:8000 fastapi-app
