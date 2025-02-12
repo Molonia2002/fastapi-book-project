@@ -6,7 +6,23 @@ from fastapi.responses import JSONResponse
 from api.db.schemas import Book, Genre, InMemoryDB
 
 router = APIRouter()
+# Mock database (Replace this with a proper database if needed)
+books_db = [
+    {"id": 1, "title": "The Hobbit", "author": "J.R.R. Tolkien", "publication_year": 1937, "genre": "Fantasy"},
+    {"id": 2, "title": "1984", "author": "George Orwell", "publication_year": 1949, "genre": "Dystopian"},
+    {"id": 3, "title": "To Kill a Mockingbird", "author": "Harper Lee", "publication_year": 1960, "genre": "Fiction"},
+]
 
+@router.get("/{book_id}", response_model=Book)
+async def get_book(book_id: int):
+    """
+    Retrieve a book by its ID.
+    """
+    book = next((book for book in books_db if book["id"] == book_id), None)
+    if book is None:
+        raise HTTPException(status_code=404, detail="Book not found")
+    return book
+    
 db = InMemoryDB()
 db.books = {
     1: Book(
